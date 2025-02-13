@@ -1,0 +1,11 @@
+.slidev-layout {
+  h1 {
+    font-family: serif;
+    font-size: 30px;
+  }
+}
+
+.slidev-code {
+  --slidev-code-font-size: 10px;
+  --slidev-code-line-height: 15px;
+}
