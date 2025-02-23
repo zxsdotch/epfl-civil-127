@@ -1,0 +1,20 @@
+[34m[my-first-git-repo]$[0m git merge --no-ff --no-edit brA
+Merge made by the 'ort' strategy.
+ haiku.txt | 2 [32m+[0m[31m-[0m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[34m[my-first-git-repo]$[0m git merge --no-ff --no-edit brB
+Auto-merging haiku.txt
+CONFLICT (content): Merge conflict in haiku.txt
+Automatic merge failed; fix conflicts and then commit the result.
+[34m[my-first-git-repo]$[0m head -n1 haiku.txt 
+<<<<<<< HEAD
+Life flows like rivers of change,
+=======
+git flows like rivers of change!
+>>>>>>> brB
+[34m[my-first-git-repo]$[0m git restore --ours haiku.txt
+[34m[my-first-git-repo]$[0m head -n1 haiku.txt
+Life flows like rivers of change,
+[34m[my-first-git-repo]$[0m git restore --theirs haiku.txt
+[34m[my-first-git-repo]$[0m head -n1 haiku.txt             
+git flows like rivers of change!
