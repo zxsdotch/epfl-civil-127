@@ -39,9 +39,10 @@ improving!
 
 # Questions, comments, feedback:
 
-<v-clicks depth="2">
+<v-clicks depth="1">
 
 - [Forum](https://moodle.epfl.ch/mod/forum/view.php?id=1324494)
+  - You can post questions in English or French
 - alok.menghrajani@epfl.ch or alexandre.alahi@epfl.ch
 - Teaching Assistants
   - Valentin and Weijiang
@@ -67,6 +68,9 @@ to hear from you.
 
 We can use a 1D list to store a 2D grid. This is very efficient, if the
 HEIGHT is a power of 2, the offset computation is very efficient.
+
+Python performs bounds checks for us (throws IndexError), but when we flatten a
+2D array into 1D, we need to implement additional bound checks.
 
 -->
 
@@ -122,7 +126,11 @@ do get a list of lists.
 
 <p>We have an incorrect behavior.</p>
 
-<!-- Can you explain what's going on? You'll understand later...
+<!-- Can you explain what's going on?
+
+The initial list's memory gets shared, we say that all the rows are referencing the same underlying list.
+When you assign a list in Python, the list is not copied. Both variables share the same reference.
+
 -->
 
 ---
@@ -164,6 +172,12 @@ data in a grid. We can use a dict! -->
 <p>Result:</p>
 
 <<< 2d_grid_4.out txt {*}{lines: false}
+
+<!--
+
+There are also other ways to represent 2D arrays. E.g. using numpy's matrices, dict with complex numbers, etc.
+
+-->
 
 ---
 
@@ -216,6 +230,11 @@ are free books and tutorials.
 Again, we'll go over the basics, we won't cover all the features in this class.
 If there's something you feel is missing, please let me know.
 
+This session will be CLI heavy. I am aware that some of you aren't comfortable with
+using a CLI. Software engineers enjoy using CLIs because it's easier to copy/paste commands
+vs having to describe UI actions. It's also easier to script. You can save, recall, and search
+your history of commands, etc.
+
 -->
 
 ---
@@ -230,8 +249,8 @@ If there's something you feel is missing, please let me know.
   - 3rd party graphical interfaces
 - GitHub
   - Owned by Microsoft
-  - Collaboration tool, builds on top of git
-  - Loads of features (pull requests, issue tracking, forums, wiki, pages, CI/CD, etc.)
+  - Builds on top of git
+  - Lots of collaborative features (pull requests, issue tracking, forums, wiki, pages, CI/CD, etc.)
 
 </v-clicks>
 
@@ -301,9 +320,16 @@ The developer will then be able to resolve the conflict manually.
 
 # Resources
 
+<v-clicks>
+
 - git man pages
-- Pro Git (free book): https://git-scm.com/book/en/v2
+  - man == manual. To learn about e.g. `git add`, type: `$ man git-add`
+  - also available online, e.g. https://git-scm.com/docs/git-add
+- [Pro Git](https://git-scm.com/book/en/v2) (free book)
 - Lots of free resources and tutorials
+  - Use your favorite search engine to find them
+
+</v-clicks>
 
 <!--
 
@@ -512,11 +538,15 @@ git log shows our first commit. Again, your hash will differ.
 
 - Every object in the tree is identified by a hash
 - An object's hash is (conceptually):<br/>
-<code>hash(diff + parent hashes + commit message, author, time, ...)></code><br/>
+<code>hash(diff + parent hashes + commit message, author, time, ...)</code><br/>
   - where <code>hash()</code> is a one way function
   - and diff is the content change
 - git is fast at showing you the state of the repo for a given hash or
-computing the delta between two hashes.
+computing the delta between two hashes
+
+<!--
+git being fast is the reason it displaced all the version control software that existed prior to git.
+-->
 
 ---
 
@@ -567,8 +597,8 @@ area but doesn't include newly added file. Maybe it should?
 ```ansi {1-2|3-6|7-18|*}
 [34m[my-first-git-repo]$[0m git add haiku.txt
 [34m[my-first-git-repo]$[0m git add haiku2.txt
-[34m[my-first-git-repo]$[0m git commit -m 'Finish both haiku'
-[main 9cc0f57] Finish both haiku
+[34m[my-first-git-repo]$[0m git commit -m 'Finish both haikus'
+[main 9cc0f57] Finish both haikus
  2 files changed, 3 insertions(+)
  create mode 100644 haiku2.txt
 [34m[my-first-git-repo]$[0m git log
@@ -576,7 +606,7 @@ area but doesn't include newly added file. Maybe it should?
 Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>
 Date:   Sat Feb 8 15:35:38 2025 +0100
 
-    Finish both haiku
+    Finish both haikus
 
 [33mcommit 17d2441d2c49913d9f022dd49f727f70010ce0c1[0m
 Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>
@@ -591,7 +621,7 @@ Date:   Fri Feb 7 10:42:24 2025 +0100
 
 ```ansi
 [34m[my-first-git-repo]$[0m git log --oneline
-[33m9cc0f57[m[33m ([m[1;36mHEAD -> [m[1;32mmain[33m)[0m Finish both haiku
+[33m9cc0f57[m[33m ([m[1;36mHEAD -> [m[1;32mmain[33m)[0m Finish both haikus
 [33m17d2441[0m Initial commit
 ```
 
@@ -612,7 +642,7 @@ the output of git commands to better fit your needs.
 Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>[0m
 Date:   Sat Feb 8 15:35:38 2025 +0100[0m
 [0m
-    Finish both haiku[0m
+    Finish both haikus[0m
 ```
 
 <!--
@@ -701,12 +731,12 @@ layout: center
 <v-switch>
 <template #0>
 
-# <span style="color: yellow">branches</span> and merges
+# <span style="color: green">branches</span> and merges
 
 </template>
 <template #1>
 
-# branches and <span style="color: yellow">merges</span>
+# branches and <span style="color: green">merges</span>
 
 </template>
 </v-switch>
@@ -853,7 +883,7 @@ Date:   Sat Feb 8 16:21:25 2025 +0100[0m
 Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>[0m
 Date:   Sat Feb 8 15:35:38 2025 +0100[0m
 [0m
-    Finish both haiku[0m
+    Finish both haikus[0m
 [0m
 [33mcommit 17d2441d2c49913d9f022dd49f727f70010ce0c1[0m[0m
 Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>[0m
@@ -893,7 +923,7 @@ git log now shows 4 objects!
 [32m|[0m Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>[0m
 [32m|[0m Date:   Sat Feb 8 15:35:38 2025 +0100[0m
 [32m|[0m [0m
-[32m|[0m     Finish both haiku[0m
+[32m|[0m     Finish both haikus[0m
 [32m|[0m [0m
 * [33mcommit 17d2441d2c49913d9f022dd49f727f70010ce0c1[0m[0m
   Author: Alok Menghrajani <441307+alokmenghrajani@users.noreply.github.com>[0m
@@ -914,7 +944,7 @@ because you have the same graph in your head.
 ```mermaid
 gitGraph
   commit id: "Initial commit"
-  commit id: "Finish both haiku"
+  commit id: "Finish both haikus"
   branch fix-typo
   checkout fix-typo
   commit id: "Add missing punctuation"
@@ -1010,7 +1040,7 @@ Switched to branch 'main'
 
 # Automatic conflict resolution
 
-```ansi {1-4|5-9|10-13|14-17|*}
+```ansi {1-4|5-9|6|10-13|14-17|*}
 [34m[my-first-git-repo]$[0m git merge --no-ff --no-edit brA
 Merge made by the 'ort' strategy.
  haiku.txt | 2 [32m+[0m[31m-[0m
@@ -1066,7 +1096,7 @@ will be on the same line.
 
 # Manual conflict resolution
 
-<<< manual_merge.out ansi {1-4|5-8|9-14|15-17|18-20|*}
+<<< manual_merge.out ansi {1-4|5-8|6-8|9-14|15-17|18-20|*}
 
 ---
 
@@ -1138,7 +1168,98 @@ Date:   Sat Feb 8 17:22:34 2025 +0100[0m
   Everything preserved.[0m[0m
 ```
 
-<!-- git show on the manual merge commit is intersting -->
+<!-- git show on the manual merge commit is interesting -->
+
+---
+
+# Tips for authoring commits
+
+- Each commit should be as small as possible
+- Single cohesive idea
+- Split large commits into small commits by dividing large problems into smaller
+  pieces
+
+<!--
+Make your commits small atomic units of work. Let's say you are implementing
+feature X and you find some unrelated bug: create a WIP commit, create a new
+branch, fix the bug (or put a marker), go back to your work, finish your commit.
+You want lots of small atomic changes, not one big chunk.
+
+don't commit breaking changes. You can keep working locally until
+your commit is in working order.
+
+The Sokoban labs is a good example of breaking a large problem (implementing a Sokoban game) into
+small chunks. Each lab is about the right size for a single commit.
+
+-->
+
+---
+
+# Tips for writing commit messages
+
+- Explain the gist of the change in the title
+- Explain the reason for the change in the description
+- Any other information which might be useful to you or someone else looking at
+  the commit out of context
+  - For bug fixes: link to revision which introduced the bug
+  - For features: task or discussion tracking the feature
+  - How you tested the change
+  - ...
+
+<!--
+title: Common vocabulary includes "Feature: ", "Bug fix: ", "Improve documentation: ", etc.
+
+description: You can link to an issue tracker or external documentation.
+
+you tested your change, right?
+
+You won't believe the number of times I have seen commits merged into
+the main branch where the code is simply incorrect. The author and reviewer
+never bothered running the code. This kind of sloppy engineering can bring
+large engineering teams to a grinding halt until the bad commit is reverted.
+
+Normally, there are processes in place to avoid bad commits, such as
+automated linting and testing prior to merging.
+
+Things I skipped:
+- tracking remote branches
+- configuring git (creating aliases, pre/post hooks, etc.)
+- git bisect (we can get to it during the unittesting session)
+- gitignore file
+- git submodules
+- git lfs
+- exit git commit message editor with an error code == abort operation
+- fixup
+- detached head state
+- when you can't delete a branch
+- Git remote fetch fails in some cases, even with -a.
+
+-->
+
+---
+
+# Tips for writing commit messages
+
+Example commit
+
+```txt {*}{lines: false}
+Fix: ignore link headers for responsive images
+
+Link headers are optionally supported for cases where you prefer to send
+resource loading hints before you're ready to send the body of a
+request. Many resources can be correctly preloaded from a link
+header however responsive images are currently not supported. They result
+in broken images.
+
+This commit disables preloading responsive images until preloading them
+is fully supported (the future work is tracked in #23452).
+
+blame rev: 67ee48f7
+
+test plan: included unit test fails without this fix.
+
+closes: #12521
+```
 
 ---
 layout: center
@@ -1208,9 +1329,31 @@ rewrite the commit message.
 
 ---
 
+# Rebase
+
+<v-clicks>
+
+- <code>git rebase &lt;ref&gt;</code>
+- <code>git rebase -i &lt;ref&gt;</code>
+
+</v-clicks>
+
+<!--
+Sometimes you don't want a mrege commit. E.g. you want your local branch
+to match a remote branch. 
+
+I believe you can use git merge without --no-ff here? Or rebase.
+
+git rebase can conflict. Resolve conflicts and use git rebase --continue.
+
+-->
+
+---
+
 # git reflog
 
 - Operate on the local history (reference logs)
+- Enables undoing a rebase
 
 <!--
 git reflog lets you find commits which are no longer reachable from
@@ -1245,27 +1388,6 @@ and use `git cherry-pick --continue`.
 - <code>git restore &lt;ref&gt; &lt;files&gt;</code>
 
 </v-clicks>
-
----
-
-# Rebase
-
-<v-clicks>
-
-- <code>git rebase &lt;ref&gt;</code>
-- <code>git rebase -i &lt;ref&gt;</code>
-
-</v-clicks>
-
-<!--
-Sometimes you don't want a mrege commit. E.g. you want your local branch
-to match a remote branch. 
-
-I believe you can use git merge without --no-ff here? Or rebase.
-
-git rebase can conflict. Resolve conflicts and use git rebase --continue.
-
--->
 
 ---
 
@@ -1329,7 +1451,7 @@ branch.
 
 ---
 
-# Stash
+# Stashing
 
 - <code>git stash</code>
 - <code>git stash list</code>
@@ -1339,60 +1461,3 @@ branch.
 store your local file system changes.
 -->
 
----
-
-# Tips for authoring commits
-
-- Each commit should be as small as possible
-- Single cohesive idea
-- Split large commits into small commits by dividing large problems into smaller
-  pieces
-
-<!--
-Make your commits small atomic units of work. Let's say you are implementing
-feature X and you find some unrelated bug: create a WIP commit, create a new
-branch, fix the bug (or put a marker), go back to your work, finish your commit.
-You want lots of small atomic changes, not one big chunk.
-
-don't commit breaking changes. You can keep working locally until
-your commit is in working order.
--->
-
----
-
-# Tips for writing commit messages
-
-- Explain the gist of the change in the title
-- Explain the reason for the change in the description
-- Any other information which might be useful to you or someone else looking at
-  the commit out of context
-
-<!--
-title: Common vocabulary includes "Feature: ", "Bug fix: ", "Improve documentation: ", etc.
-
-description: You can link to an issue tracker or external documentation.
-
-you tested your change, right?
-
-You won't believe the number of times I have seen commits merged into
-the main branch where the code is simply incorrect. The author and reviewer
-never bothered running the code. This kind of sloppy engineering can bring
-large engineering teams to a grinding halt until the bad commit is reverted.
-
-Normally, there are processes in place to avoid bad commits, such as
-automated linting and testing prior to merging.
-
-Things I skipped:
-- tracking remote branches
-- configuring git (creating aliases, pre/post hooks, etc.)
-- git bisect (we can get to it during the unittesting session)
-- gitignore file
-- git submodules
-- git lfs
-- exit git commit message editor with an error code == abort operation
-- fixup
-- detached head state
-- when you can't delete a branch
-- Git remote fetch fails in some cases, even with -a.
-
--->

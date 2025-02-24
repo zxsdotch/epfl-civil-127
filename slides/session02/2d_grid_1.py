@@ -2,8 +2,10 @@ WIDTH, HEIGHT = (5, 4)
 grid = [0] * (WIDTH * HEIGHT)
 
 def offset(x, y):
-    if x < 0 or x >= WIDTH or y < 0 or y >= HEIGHT:
-        raise Exception("invalid offset", x, y)
+    if not 0 <= x < WIDTH:
+        raise IndexError("invalid offset: ", x, y)
+    if not 0 <= y < HEIGHT:
+        raise IndexError("invalid offset: ", x, y)
     return x * HEIGHT + y
 
 def get(x, y):
